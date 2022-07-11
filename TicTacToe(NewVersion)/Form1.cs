@@ -19,18 +19,28 @@ namespace TicTacToe_NewVersion_
             Application.Exit();
         }
 
+        private void resetCountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            x_wins_count.Text = "0";
+            o_wins_count.Text = "0";
+            draw_count.Text = "0";
+        }
+
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            turn = true;
+            turn—ount = 0;
+
+            foreach (Control c in Controls)
             {
-                foreach (Control c in Controls)
+                try
                 {
                     Button b = (Button)c;
                     b.Enabled = true;
                     b.Text = "";
                 }
+                catch { }
             }
-            catch { }
         }
 
         private void button_click(object sender, EventArgs e)
@@ -80,30 +90,39 @@ namespace TicTacToe_NewVersion_
                 DisableButtons();
                 String winner = "";
                 if (turn)
+                {
                     winner = "O";
+                    o_wins_count.Text = Convert.ToString(int.Parse(o_wins_count.Text) + 1);
+                }
                 else
+                {
                     winner = "X";
+                    x_wins_count.Text = Convert.ToString(int.Parse(x_wins_count.Text) + 1);
+                }
 
                 MessageBox.Show(winner + " Wins!", "Goal!");
             }
             else
             {
                 if (turn—ount == 9)
+                {
                     MessageBox.Show("Draw!", "Bummer");
+                    draw_count.Text = Convert.ToString(int.Parse(draw_count.Text) + 1);
+                }
             }
         }
 
         private void DisableButtons()
         {
-            try
+            foreach (Control c in Controls)
             {
-                foreach (Control c in Controls)
+                try
                 {
                     Button b = (Button)c;
                     b.Enabled = false;
                 }
+                catch { }
             }
-            catch { }
         }
 
         private void button_enter(object sender, EventArgs e)
